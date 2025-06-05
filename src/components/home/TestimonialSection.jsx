@@ -107,6 +107,15 @@ function TestimonialSection() {
                                     borderRadius: 4,
                                     border: "1px solid",
                                     borderColor: theme.palette.grey[100],
+                                    transform: "scale(1)",
+                                    transition:
+                                        "transform 0.3s ease 0.1s, box-shadow 0.3s ease 0.1s",
+                                    "&:hover": {
+                                        transform:
+                                            "translateY(-5px) scale(1.02)",
+                                        boxShadow:
+                                            "0 8px 20px rgba(0, 0, 0, 0.08)",
+                                    },
                                 }}
                             >
                                 <Box
