@@ -163,7 +163,7 @@ const faqItems = [
         question: "Får jeg support inkludert i prisen?",
         answer: (
             <>
-                Alle pakker inkluderer support. bruker
+                Alle pakker inkluderer support. bruker{" "}
                 <a
                     href="https://support.smartplan.no/"
                     target="_blank"
