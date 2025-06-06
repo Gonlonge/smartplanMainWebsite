@@ -14,21 +14,18 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useInView } from "react-intersection-observer";
+import { db } from "../../firebaseConfig";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const inquiryTypes = [
     { value: "general", label: "Generell forespørsel" },
-    { value: "demo", label: "Ønske om produktdemo" },
+    { value: "demo", label: "Ønsker en presentasjon" },
     { value: "pricing", label: "Spørsmål om priser" },
-    { value: "support", label: "Teknisk support" },
-    { value: "feedback", label: "Tilbakemelding" },
 ];
 
 function ContactForm() {
     const theme = useTheme();
-    const { ref, inView } = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -49,58 +46,47 @@ function ContactForm() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-        // Clear error when field is edited
-        if (errors[name]) {
-            setErrors({
-                ...errors,
-                [name]: "",
-            });
-        }
+        setFormData({ ...formData, [name]: value });
+        if (errors[name]) setErrors({ ...errors, [name]: "" });
     };
 
     const validate = () => {
         const newErrors = {};
-
         if (!formData.firstName.trim())
             newErrors.firstName = "Fornavn er påkrevd";
         if (!formData.lastName.trim())
             newErrors.lastName = "Etternavn er påkrevd";
-
         if (!formData.email.trim()) {
             newErrors.email = "E-post er påkrevd";
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = "E-post er ugyldig";
         }
-
         if (!formData.company.trim())
             newErrors.company = "Firmanavn er påkrevd";
         if (!formData.message.trim()) newErrors.message = "Melding er påkrevd";
-
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
-
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
 
-        // Simulating form submission
-        setTimeout(() => {
+        try {
+            await addDoc(collection(db, "contactMessages"), {
+                ...formData,
+                createdAt: serverTimestamp(),
+            });
+
             setSnackbar({
                 open: true,
                 message: "Din forespørsel er sendt! Vi vil kontakte deg snart.",
                 severity: "success",
             });
 
-            // Reset form
             setFormData({
                 firstName: "",
                 lastName: "",
@@ -110,17 +96,23 @@ function ContactForm() {
                 inquiryType: "general",
                 message: "",
             });
-        }, 1000);
+        } catch (error) {
+            console.error("Firebase-feil:", error);
+            setSnackbar({
+                open: true,
+                message: "Noe gikk galt. Prøv igjen senere.",
+                severity: "error",
+            });
+        }
     };
 
-    const handleCloseSnackbar = () => {
-        setSnackbar({ ...snackbar, open: false });
-    };
+    const handleCloseSnackbar = () => setSnackbar({ ...snackbar, open: false });
 
     return (
         <Box sx={{ py: 8 }}>
             <Container maxWidth="lg">
                 <Grid container spacing={6}>
+                    {/* Kontaktdetaljer (venstre side) */}
                     <Grid
                         item
                         xs={12}
@@ -131,26 +123,30 @@ function ContactForm() {
                             <Typography
                                 variant="h2"
                                 component="h1"
-                                sx={{
-                                    fontWeight: 700,
-                                    mb: 3,
-                                }}
+                                sx={{ fontWeight: 700, mb: 3 }}
                             >
                                 Kontakt oss
                             </Typography>
                             <Typography
                                 variant="h6"
                                 sx={{
-                                    mb: 4,
+                                    mb: 2,
                                     color: theme.palette.text.secondary,
                                     fontWeight: 400,
                                 }}
                             >
                                 Har du spørsmål om Smartplan eller ønsker en
-                                demo? Fyll ut skjemaet, så tar vi kontakt med
-                                deg så fort som mulig.
+                                presentasjon? Fyll ut skjemaet, så tar vi
+                                kontakt med deg så fort som mulig.
                             </Typography>
-
+                            <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                sx={{ mb: 4 }}
+                            >
+                                Vårt team er tilgjengelig mandag til fredag,
+                                08:00–16:00.
+                            </Typography>
                             <Paper
                                 elevation={0}
                                 sx={{
@@ -170,61 +166,33 @@ function ContactForm() {
                                 >
                                     Kontaktinformasjon
                                 </Typography>
-                                <Box sx={{ mb: 1.5 }}>
-                                    <Typography
-                                        variant="body2"
-                                        fontWeight={600}
-                                    >
-                                        E-post:
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ mb: 1 }}>
-                                        post@smartplan.no
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ mb: 1.5 }}>
-                                    <Typography
-                                        variant="body2"
-                                        fontWeight={600}
-                                    >
-                                        Telefon:
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ mb: 1 }}>
-                                        +47 52 05 52 25
-                                    </Typography>
-                                </Box>
-                                <Box>
-                                    <Typography
-                                        variant="body2"
-                                        fontWeight={600}
-                                    >
-                                        Besøksadresse:
-                                    </Typography>
-                                    <Box sx={{ mb: 1.5 }}>
-                                        <Typography variant="body2">
-                                            Svanholmen 7, 4313 Sandnes
-                                        </Typography>
-                                    </Box>
-                                    <Typography
-                                        variant="body2"
-                                        fontWeight={600}
-                                    >
-                                        Etasje:
-                                    </Typography>
-
-                                    <Typography variant="body2" sx={{ mb: 1 }}>
-                                        2
-                                    </Typography>
-                                </Box>
+                                <Typography variant="body2" fontWeight={600}>
+                                    E-post:
+                                </Typography>
+                                <Typography variant="body2" sx={{ mb: 1 }}>
+                                    post@smartplan.no
+                                </Typography>
+                                <Typography variant="body2" fontWeight={600}>
+                                    Telefon:
+                                </Typography>
+                                <Typography variant="body2" sx={{ mb: 1 }}>
+                                    +47 52 05 52 25
+                                </Typography>
+                                <Typography variant="body2" fontWeight={600}>
+                                    Besøksadresse:
+                                </Typography>
+                                <Typography variant="body2" sx={{ mb: 1 }}>
+                                    Svanholmen 7, 4313 Sandnes
+                                </Typography>
+                                <Typography variant="body2" fontWeight={600}>
+                                    Etasje:
+                                </Typography>
+                                <Typography variant="body2">2</Typography>
                             </Paper>
-
-                            <Typography variant="body2" color="text.secondary">
-                                Vårt team er tilgjengelig mandag til fredag,
-                                08:00-16:00. Vi bestreber oss på å svare på alle
-                                henvendelser innen 24 timer på virkedager.
-                            </Typography>
                         </Box>
                     </Grid>
 
+                    {/* Skjema (høyre side) */}
                     <Grid
                         item
                         xs={12}

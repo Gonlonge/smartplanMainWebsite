@@ -273,7 +273,7 @@ function PricingPlans() {
                                         sx={{ fontWeight: 700, mb: 0.5 }}
                                     >
                                         {plan.monthlyPrice === 0
-                                            ? "Gratis"
+                                            ? "0 kr/måned"
                                             : yearly
                                             ? `${plan.yearlyPrice} kr`
                                             : `${plan.monthlyPrice} kr`}

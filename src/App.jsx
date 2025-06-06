@@ -9,6 +9,7 @@ import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import PricingPage from "./pages/PricingPage";
 import ContactPage from "./pages/ContactPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
     const { pathname } = useLocation();
@@ -43,6 +44,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/pricing" element={<PricingPage />} />
                     <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/admin" element={<AdminPage />} />
                 </Routes>
             </main>
             <Footer />
