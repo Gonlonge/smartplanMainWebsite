@@ -143,40 +143,44 @@ function PricingPlans() {
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: "center",
+                            flexDirection: "column", // Bytt til kolonne for å stable elementene
+                            alignItems: "center",
                             mb: 5,
                         }}
                     >
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={yearly}
-                                    onChange={handleBillingChange}
-                                    color="primary"
-                                />
-                            }
-                            label=""
-                            sx={{ mx: 1 }}
-                        />
-                        <Typography
-                            component="span"
-                            sx={{ fontWeight: yearly ? 400 : 700 }}
-                        >
-                            Månedlig
-                        </Typography>
-                        <Typography component="span" sx={{ mx: 1 }}>
-                            /
-                        </Typography>
-                        <Typography
-                            component="span"
-                            sx={{ fontWeight: yearly ? 700 : 400 }}
-                        >
-                            Årlig
-                        </Typography>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={yearly}
+                                        onChange={handleBillingChange}
+                                        color="primary"
+                                    />
+                                }
+                                label=""
+                                sx={{ mx: 1 }}
+                            />
+                            <Typography
+                                component="span"
+                                sx={{ fontWeight: yearly ? 400 : 700 }}
+                            >
+                                Månedlig
+                            </Typography>
+                            <Typography component="span" sx={{ mx: 1 }}>
+                                /
+                            </Typography>
+                            <Typography
+                                component="span"
+                                sx={{ fontWeight: yearly ? 700 : 400 }}
+                            >
+                                Årlig
+                            </Typography>
+                        </Box>
+
                         {yearly && (
                             <Paper
                                 sx={{
-                                    ml: 2,
+                                    mt: 1, // Legg litt margin på toppen
                                     px: 1.5,
                                     py: 0.5,
                                     bgcolor: theme.palette.success.light,
@@ -184,6 +188,7 @@ function PricingPlans() {
                                     borderRadius: "20px",
                                     fontSize: "0.75rem",
                                     fontWeight: 700,
+                                    textAlign: "center",
                                 }}
                             >
                                 Spar{" "}
