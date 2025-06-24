@@ -1,11 +1,9 @@
-// src/pages/AdminPage.jsx
-
 import { Box } from "@mui/material";
-import MessagesAdmin from "../components/contact/MessageAdmin";
+import MessagesAdmin from "../components/admin/MessageAdmin";
 
 function AdminPage() {
     return (
-        <Box component="section">
+        <Box component="section" sx={{ pt: 4 }}>
             <MessagesAdmin />
         </Box>
     );

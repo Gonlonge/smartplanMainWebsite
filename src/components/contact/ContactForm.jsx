@@ -83,7 +83,7 @@ function ContactForm() {
 
             setSnackbar({
                 open: true,
-                message: "Din forespørsel er sendt! Vi vil kontakte deg snart.",
+                message: "Din forespørsel er sendt",
                 severity: "success",
             });
 

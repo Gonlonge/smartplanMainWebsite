@@ -154,6 +154,16 @@ function Footer() {
                             >
                                 Support
                             </Link>
+                            <Link
+                                href="/loginPage"
+                                underline="hover"
+                                color="inherit"
+                                sx={{ opacity: 0.8 }}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Admin
+                            </Link>
                         </Stack>
                     </Grid>
                 </Grid>

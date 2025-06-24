@@ -1,4 +1,3 @@
-// src/components/MessagesAdmin.js
 import { useEffect, useState } from "react";
 import {
     Box,
@@ -16,8 +15,9 @@ import {
     DialogContentText,
     DialogActions,
 } from "@mui/material";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { getContactMessages } from "../../firebase/queries/getContactMessages";
+import { deleteContactMessage } from "../../firebase/queries/deleteContactMessage";
+import LogoutButton from "../logout/LogoutButton";
 
 function MessagesAdmin() {
     const [messages, setMessages] = useState([]);
@@ -25,48 +25,71 @@ function MessagesAdmin() {
     const [selectedMessage, setSelectedMessage] = useState(null);
     const theme = useTheme();
 
+    // Fetch messages
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const q = query(
-                    collection(db, "contactMessages"),
-                    orderBy("createdAt", "desc")
-                );
-                const snapshot = await getDocs(q);
-                const data = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setMessages(data);
+                const msgs = await getContactMessages();
+                setMessages(msgs);
             } catch (error) {
-                console.error("Feil ved henting av meldinger:", error);
+                console.error("Error fetching messages:", error);
             } finally {
                 setLoading(false);
             }
         };
-
         fetchMessages();
     }, []);
 
-    const handleOpenModal = (msg) => {
-        setSelectedMessage(msg);
-    };
+    const handleOpenModal = (msg) => setSelectedMessage(msg);
+    const handleCloseModal = () => setSelectedMessage(null);
 
-    const handleCloseModal = () => {
-        setSelectedMessage(null);
+    const handleDeleteMessage = async (messageId) => {
+        try {
+            await deleteContactMessage(messageId);
+            setMessages((prev) => prev.filter((msg) => msg.id !== messageId));
+            handleCloseModal();
+        } catch (error) {
+            console.error("Error deleting message:", error);
+        }
     };
 
     return (
         <Box sx={{ py: 10, backgroundColor: theme.palette.background.default }}>
             <Container maxWidth="lg">
-                <Box sx={{ textAlign: "center", mb: 8 }}>
-                    <Typography variant="h2" sx={{ fontWeight: 700, mb: 2 }}>
+                <Box
+                    sx={{
+                        position: "relative",
+                        mb: 2,
+                    }}
+                >
+                    <Typography
+                        variant="h2"
+                        sx={{ fontWeight: 700, textAlign: "center" }}
+                    >
                         Innkommende meldinger
                     </Typography>
-                    <Typography variant="h6" sx={{ maxWidth: 700, mx: "auto" }}>
-                        Her ser du alle meldinger sendt inn via kontaktskjema.
-                    </Typography>
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 0,
+                            right: 0,
+                        }}
+                    >
+                        <LogoutButton />
+                    </Box>
                 </Box>
+
+                <Typography
+                    variant="h6"
+                    sx={{
+                        maxWidth: 700,
+                        mx: "auto",
+                        mb: 4,
+                        textAlign: "center",
+                    }}
+                >
+                    Her ser du alle meldinger sendt inn via kontaktskjema.
+                </Typography>
 
                 {loading ? (
                     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -175,7 +198,6 @@ function MessagesAdmin() {
                     </Grid>
                 )}
 
-                {/* Modal */}
                 <Dialog
                     open={!!selectedMessage}
                     onClose={handleCloseModal}
@@ -219,6 +241,14 @@ function MessagesAdmin() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseModal}>Lukk</Button>
+                        <Button
+                            color="error"
+                            onClick={() =>
+                                handleDeleteMessage(selectedMessage.id)
+                            }
+                        >
+                            Slett
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </Container>
