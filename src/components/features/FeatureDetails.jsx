@@ -4,7 +4,7 @@ import { features } from "../../data/features";
 import CtaSection from "../home/CtaSection";
 import FeatureHeader from "./FeatureHeader";
 import FeatureMainContent from "./FeatureMainContent";
-import FeatureBottom from "./FeatureBottom";
+import FeatureBottom from "./featureBottom";
 
 const slugify = (text) =>
     text
