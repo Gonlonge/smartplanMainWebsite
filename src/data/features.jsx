@@ -225,7 +225,7 @@ export const features = [
         videoUrl: "https://www.youtube.com/embed/xyz123",
         heading: "Fleksibel prosjektplanlegging",
         shortDescription:
-            "Planlegg og strukturer hele prosjektet med et intuitivt grensesnitt og dra-og-slipp-funksjonalitet.",
+            "Planlegg og strukturer hele prosjektet med et intuitivt grensesnitt og dra-og-slipp-funksjonalitet",
         description:
             "Smartplan gir deg mulighet til å sette opp alle prosjektets faser i en visuell og brukervennlig tidslinje. Du kan raskt justere aktiviteter, sette milepæler og se status i sanntid. Systemet gjør det enkelt å delegere oppgaver og kommunisere endringer med teamet.",
         longDescription:
