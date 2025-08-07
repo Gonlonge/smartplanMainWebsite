@@ -8,6 +8,8 @@ import {
     useTheme,
 } from "@mui/material";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
+
 import ConstructionIcon from "@mui/icons-material/Construction";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import PeopleIcon from "@mui/icons-material/People";
@@ -20,8 +22,8 @@ import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 
 const features = [
     {
-        icon: <ConstructionIcon fontSize="large" />,
         title: "Prosjektplanlegging",
+        icon: <ConstructionIcon fontSize="large" />,
         description:
             "Planlegg alle faser av prosjektet med et intuitivt grensesnitt og drag-and-drop funksjonalitet.",
     },
@@ -75,8 +77,16 @@ const features = [
     },
 ];
 
+// 👇 slugify-funksjon for å lage URL-vennlig path
+const slugify = (text) =>
+    text
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w-]+/g, "");
+
 function FeaturesSection() {
     const theme = useTheme();
+    const navigate = useNavigate();
     const { ref, inView } = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -125,13 +135,21 @@ function FeaturesSection() {
                         >
                             <Card
                                 className="animated-element"
+                                onClick={() =>
+                                    navigate(
+                                        `/funksjoner/${slugify(feature.title)}`
+                                    )
+                                }
+                                role="button"
+                                tabIndex={0}
                                 sx={{
+                                    cursor: "pointer",
                                     height: "100%",
                                     display: "flex",
                                     flexDirection: "column",
                                     border: "1px solid",
                                     borderColor: theme.palette.grey[100],
-                                    transform: "scale(1)", // ensure default state
+                                    transform: "scale(1)",
                                     transition:
                                         "transform 0.3s ease 0.1s, box-shadow 0.3s ease 0.1s",
                                     "&:hover": {
