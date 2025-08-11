@@ -5,7 +5,7 @@ export default function FeatureMainContent({ feature }) {
 
     return (
         <Box sx={{ mb: 6 }}>
-            <Grid container spacing={6} alignItems="center">
+            <Grid container spacing={6} alignItems="flex-start">
                 {mainImage && (
                     <Grid item xs={12} md={6}>
                         <Box sx={{ width: "100%" }}>
@@ -22,50 +22,25 @@ export default function FeatureMainContent({ feature }) {
                         </Box>
                     </Grid>
                 )}
-
                 <Grid item xs={12} md={6}>
-                    <Typography variant="h3" fontWeight={700} gutterBottom>
-                        {feature.title}
-                    </Typography>
-
-                    {feature.shortDescription && (
-                        <Typography
-                            variant="body1"
-                            color="text.secondary"
-                            sx={{ maxWidth: 600 }}
-                        >
-                            {feature.shortDescription}
+                    <Box>
+                        <Typography variant="h3" fontWeight={700} gutterBottom>
+                            {feature.title}
                         </Typography>
-                    )}
 
-                    {feature.videoUrl && (
-                        <Box
-                            sx={{
-                                mt: 4,
-                                aspectRatio: "16 / 9",
-                                position: "relative",
-                                width: "100%",
-                            }}
-                        >
-                            <iframe
-                                src={feature.videoUrl}
-                                title={feature.title}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                style={{
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    width: "100%",
-                                    height: "100%",
-                                    borderRadius: 16,
-                                }}
-                            />
-                        </Box>
-                    )}
+                        {feature.shortDescription && (
+                            <Typography
+                                variant="body1"
+                                color="text.secondary"
+                                sx={{ maxWidth: 600 }}
+                            >
+                                {feature.shortDescription}
+                            </Typography>
+                        )}
+                    </Box>
                 </Grid>
             </Grid>
         </Box>
     );
 }
+FeatureMainContent.jsx;

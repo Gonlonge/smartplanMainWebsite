@@ -18,7 +18,7 @@ export const features = [
             "/images/prosjektplanlegging/prosjektplanleggingOne.png",
             "/images/prosjektplanlegging/prosjektplanleggingTwo.png",
             "/images/prosjektplanlegging/prosjektplanleggingThree.png",
-            "/images/prosjektplanlegging/prosjektplanlegging-copy3.png",
+            "/images/prosjektplanlegging/prosjektplanleggingFour.png",
         ],
         videoUrl: "https://www.youtube.com/embed/xyz123",
         heading: "Fleksibel prosjektplanlegging",
@@ -27,7 +27,7 @@ export const features = [
         description:
             "Smartplan gir deg mulighet til å sette opp alle prosjektets faser i en visuell og brukervennlig tidslinje. Du kan raskt justere aktiviteter, sette milepæler og se status i sanntid. Systemet gjør det enkelt å delegere oppgaver og kommunisere endringer med teamet.",
         longDescription:
-            "Med prosjektplanlegging i Smartplan kan du enkelt organisere, visualisere og tilpasse fremdriften. Bruk tidslinjen til å holde oversikt, omfordel ressurser ved behov, og sørg for at alle involverte har tilgang til oppdatert informasjon. Planleggingsmodulen er skreddersydd for dynamiske prosjekter, slik at du kan holde styringen – uansett omfang eller kompleksitet.",
+            "Med prosjektplanlegging i Smartplan kan du enkelt organisere, visualisere og tilpasse fremdriften. Bruk tidslinjen til å holde oversikt, omfordel ressurser ved behov, og sørg for at alle involverte har tilgang til oppdatert informasjon. Planleggingsmodulen er skreddersydd for dynamiske prosjekter, slik at du kan holde styringen uansett omfang eller kompleksitet.",
         image: "/images/featuresData/prosjektplanlegging.png",
     },
     {
@@ -36,10 +36,10 @@ export const features = [
         icon: TrendingUpIcon,
         intro: "Hold oversikt over ansatte, utstyr og materialer for bedre ressurskontroll.",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/ressursstyring/ressursstyringOne.png",
+            "/images/ressursstyring/ressursstyringTwo.png",
+            "/images/ressursstyring/ressursstyringThree.png",
+            "/images/ressursstyring/ressursstyringFour.png",
         ],
         heading: "Full kontroll over bemanning og utstyr",
         shortDescription:
@@ -57,10 +57,10 @@ export const features = [
         icon: PeopleIcon,
         intro: "Hold alle oppdatert med øyeblikkelig deling av informasjon, dokumenter og status.",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/samarbeidisanntid/samarbeidisanntidOne.png",
+            "/images/samarbeidisanntid/samarbeidisanntidTwo.png",
+            "/images/samarbeidisanntid/samarbeidisanntidThree.png",
+            "/images/samarbeidisanntid/samarbeidisanntidFour.png",
         ],
         heading: "Jobb sammen – uansett hvor du er",
         shortDescription:
@@ -68,7 +68,7 @@ export const features = [
         description:
             "Smartplan gir deg meldinger, varslinger og delte dokumenter på ett sted. Samarbeid enkelt med kollegaer, underentreprenører og kunder – og reduser behovet for møter og e-post.",
         longDescription:
-            "Gjennom sanntidsoppdateringer, kommentarer på oppgaver og automatisk varsling, sørger Smartplan for at alle jobber med samme informasjon. Del skjemaer, bilder og dokumentasjon direkte i prosjektet – og hold oversikt over hvem som har sett og bekreftet informasjonen.",
+            "Gjennom sanntidsoppdateringer, kommentarer på oppgaver og automatisk varsling, sørger Smartplan for at alle jobber med samme informasjon. Del skjemaer, bilder og dokumentasjon direkte i prosjektet og hold oversikt over hvem som har sett og bekreftet informasjonen.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
         image: "/images/featuresData/prosjektplanlegging.png",
     },
@@ -85,8 +85,15 @@ export const features = [
         longDescription:
             "Smartplan varsler når aktiviteter nærmer seg forfall og gir deg oversikt over avhengigheter mellom oppgaver. På den måten kan du forutse flaskehalser og gjøre nødvendige justeringer før problemene oppstår.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
-        image: "/images/featuresData/prosjektplanlegging.png",
+        image: "/images/tidsplanlegging/tidsplanleggingMain.png",
+        images: [
+            "/images/tidsplanlegging/tidsplanleggingOne.png",
+            "/images/tidsplanlegging/tidsplanleggingTwo.png",
+            "/images/tidsplanlegging/tidsplanleggingThree.png",
+            "/images/tidsplanlegging/tidsplanleggingFour.png",
+        ],
     },
+
     {
         title: "Rapportering og analyse",
         titleTwo: "Full oversikt med sanntidsdata",
@@ -101,10 +108,10 @@ export const features = [
             "Smartplan gir deg rapporter i sanntid for både økonomiske og operative forhold i prosjektet. Du kan tilpasse hvilke nøkkeltall som vises, sammenligne planlagt vs. faktisk fremdrift, og eksportere data til ulike formater. Dette gjør det enklere å dokumentere prosjektstatus til ledelse eller kunde. Systemet varsler deg også ved avvik, slik at du kan handle raskt og effektivt.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/rapporteringoganalyse/rapporteringoganalyseOne.png",
+            "/images/rapporteringoganalyse/rapporteringoganalyseTwo.png",
+            "/images/rapporteringoganalyse/rapporteringoganalyseThree.png",
+            "/images/rapporteringoganalyse/rapporteringoganalyseFour.png",
         ],
     },
 
@@ -122,10 +129,10 @@ export const features = [
             "Med Smartplan sin HMS-modul kan du enkelt planlegge, gjennomføre og dokumentere HMS-arbeid. Systemet gjør det mulig å tildele ansvar, følge opp tiltak og få varsler om frister. Alt lagres sentralt og er tilgjengelig for hele teamet – også på mobil. Dette gir økt bevissthet, bedre etterlevelse og mindre papirarbeid.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/hmsdokumentasjon/hmsdokumentasjonOne.png",
+            "/images/hmsdokumentasjon/hmsdokumentasjonTwo.png",
+            "/images/hmsdokumentasjon/hmsdokumentasjonThree.png",
+            "/images/hmsdokumentasjon/hmsdokumentasjonFour.png",
         ],
     },
 
@@ -143,10 +150,10 @@ export const features = [
             "Smartplan gjør HMS til en integrert del av hverdagen. Du kan registrere RUH rett fra mobil, knytte det til et prosjekt og følge opp med tiltak. Sikker Jobb Analyse (SJA) kan utføres digitalt før arbeid starter, og gir både dokumentasjon og trygghet. Systemet gir ledere oversikt og ansatte enkel tilgang til det som trengs.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/ruhogsja/ruhogsjaOne.png",
+            "/images/ruhogsja/ruhogsjaTwo.png",
+            "/images/ruhogsja/ruhogsjaThree.png",
+            "/images/ruhogsja/ruhogsjaFour.png",
         ],
     },
 
@@ -164,10 +171,10 @@ export const features = [
             "Enten det er prosjektmøter, vernerunder eller kundemøter – Smartplan hjelper deg å holde struktur. Alt dokumenteres og lagres i prosjektet, og du kan enkelt gå tilbake i tid for å se hva som ble besluttet. Dette sparer tid og reduserer misforståelser. Automatiske påminnelser sørger for at ingen oppgaver faller mellom to stoler.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/møterogreferater/møterogreferaterOne.png",
+            "/images/møterogreferater/møterogreferaterTwo.png",
+            "/images/møterogreferater/møterogreferaterThree.png",
+            "/images/møterogreferater/møterogreferaterFour.png",
         ],
     },
 
@@ -185,10 +192,10 @@ export const features = [
             "Smartplan gir deg økonomisk kontroll uten regneark og manuelt arbeid. Du kan definere egne kontoplaner, følge med på forbruk per aktivitet og lage fakturagrunnlag med ett klikk. Dette gir deg trygghet, transparens og sparer tid. All data er tilgjengelig for prosjektleder og økonomiansvarlig, og du får bedre økonomistyring på tvers av prosjekter.",
         videoUrl: "https://www.youtube.com/embed/xyz123",
         images: [
-            "/images/featuresData/prosjektplanlegging.png",
-            "/images/featuresData/prosjektplanlegging-copy.png",
-            "/images/featuresData/prosjektplanlegging-copy2.png",
-            "/images/featuresData/prosjektplanlegging-copy3.png",
+            "/images/økonomiogfakturering/økonomiogfaktureringOne.png",
+            "/images/økonomiogfakturering/økonomiogfaktureringTwo.png",
+            "/images/økonomiogfakturering/økonomiogfaktureringThree.png",
+            "/images/økonomiogfakturering/økonomiogfaktureringFour.png",
         ],
     },
 ];
