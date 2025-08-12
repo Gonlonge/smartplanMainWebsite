@@ -25,7 +25,6 @@ function MessagesAdmin() {
     const [selectedMessage, setSelectedMessage] = useState(null);
     const theme = useTheme();
 
-    // Fetch messages
     useEffect(() => {
         const fetchMessages = async () => {
             try {
@@ -53,28 +52,47 @@ function MessagesAdmin() {
         }
     };
 
+    // ----- Email helpers -----
+    const buildSubject = (msg) =>
+        `Svar på din henvendelse${
+            msg?.inquiryType ? ` – ${msg.inquiryType}` : ""
+        }`;
+
+    const buildBody = (msg) =>
+        `Hei ${msg?.firstName || ""},\n\n` +
+        `Takk for henvendelsen din.\n\n` +
+        `Med vennlig hilsen / Kind regards\nSmartplan AS`;
+
+    // Outlook Web compose-link
+    const buildOutlookWebHref = (msg) => {
+        const to = (msg?.email || "").trim();
+        if (!to) return null;
+        const su = encodeURIComponent(buildSubject(msg));
+        const body = encodeURIComponent(buildBody(msg));
+        return `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(
+            to
+        )}&subject=${su}&body=${body}`;
+        // For privat/live: https://outlook.live.com/owa/?path=/mail/action/compose&to=...&subject=...&body=...
+    };
+
+    // Åpne i NY fane (ikke forlat appen)
+    const openOutlookWebInNewTab = (msg) => {
+        const url = buildOutlookWebHref(msg);
+        if (!url) return;
+        window.open(url, "_blank", "noopener,noreferrer");
+    };
+
     return (
         <Box sx={{ py: 10, backgroundColor: theme.palette.background.default }}>
             <Container maxWidth="lg">
-                <Box
-                    sx={{
-                        position: "relative",
-                        mb: 2,
-                    }}
-                >
+                <Box sx={{ position: "relative", mb: 2 }}>
                     <Typography
                         variant="h2"
                         sx={{ fontWeight: 700, textAlign: "center" }}
                     >
                         Innkommende meldinger
                     </Typography>
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: 0,
-                            right: 0,
-                        }}
-                    >
+                    <Box sx={{ position: "absolute", top: 0, right: 0 }}>
                         <LogoutButton />
                     </Box>
                 </Box>
@@ -170,7 +188,16 @@ function MessagesAdmin() {
                                             </Typography>
                                         </Box>
 
-                                        <Box sx={{ mt: 2 }}>
+                                        <Box
+                                            sx={{
+                                                mt: 2,
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                                alignItems: "center",
+                                                gap: 2,
+                                                flexWrap: "wrap",
+                                            }}
+                                        >
                                             <Button
                                                 variant="outlined"
                                                 size="small"
@@ -189,6 +216,24 @@ function MessagesAdmin() {
                                                 }}
                                             >
                                                 Les mer
+                                            </Button>
+
+                                            <Button
+                                                variant="contained"
+                                                size="small"
+                                                onClick={() =>
+                                                    openOutlookWebInNewTab(msg)
+                                                }
+                                                disabled={
+                                                    !buildOutlookWebHref(msg)
+                                                }
+                                                sx={{
+                                                    borderRadius: "50px",
+                                                    px: 4,
+                                                    py: 1.5,
+                                                }}
+                                            >
+                                                Svar til avsender
                                             </Button>
                                         </Box>
                                     </CardContent>
@@ -239,8 +284,16 @@ function MessagesAdmin() {
                             </Typography>
                         </DialogContentText>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleCloseModal}>Lukk</Button>
+                    <DialogActions
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            flexWrap: "wrap",
+                            gap: 1,
+                        }}
+                    >
+                        {/* Venstre side */}
                         <Button
                             color="error"
                             onClick={() =>
@@ -249,6 +302,20 @@ function MessagesAdmin() {
                         >
                             Slett
                         </Button>
+
+                        {/* Høyre side */}
+                        <Box sx={{ display: "flex", gap: 1 }}>
+                            <Button onClick={handleCloseModal}>Lukk</Button>
+                            <Button
+                                variant="contained"
+                                onClick={() =>
+                                    openOutlookWebInNewTab(selectedMessage)
+                                }
+                                disabled={!buildOutlookWebHref(selectedMessage)}
+                            >
+                                Svar til avsender
+                            </Button>
+                        </Box>
                     </DialogActions>
                 </Dialog>
             </Container>
