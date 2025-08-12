@@ -475,7 +475,7 @@ export default function FeatureBottom({ docId, slug }) {
                         />
                     </Stack>
 
-                    {/* Requirement banner (edit mode) */}
+                    {/* Requirement banner (edit mode) (view mode) */}
                     <Alert
                         severity={
                             galleryCount >= GALLERY_TARGET ? "success" : "info"
