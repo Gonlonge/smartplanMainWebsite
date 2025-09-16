@@ -23,7 +23,7 @@ function Login() {
         try {
             const userCredential = await loginUser(email, password);
             console.log("Bruker:", userCredential.user);
-            // Send til /admin
+
             navigate("/admin");
         } catch (err) {
             console.error("Login-feil:", err);

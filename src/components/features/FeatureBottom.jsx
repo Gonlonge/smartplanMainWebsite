@@ -47,7 +47,7 @@ export default function FeatureBottom({ docId, slug }) {
         longDescription: "",
     });
 
-    // upload state
+    // upload state (FIXED: removed stray "the")
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState({}); // {key: pct}
@@ -93,13 +93,18 @@ export default function FeatureBottom({ docId, slug }) {
         loading: imagesLoading,
         error: imagesError,
         removeAt,
-        resolvedDocId,
     } = useFeatureImages({ docId: currentDocId, slug, field: "images" });
+
+    // Safety: ensure array
+    const imagesSafe = Array.isArray(images) ? images : [];
+
+    // Slice off the main image so it doesn't show again in the bottom gallery
+    const galleryImages = imagesSafe.slice(1, 4); // show images #2–#4 only
 
     // Galleri-krav
     const GALLERY_TARGET = 3;
-    const hasMain = images.length > 0;
-    const galleryCount = Math.max(0, images.length - 1); // viser images[1..3]
+    const hasMain = imagesSafe.length > 0;
+    const galleryCount = galleryImages.length; // count only what we actually display
     const missing = Math.max(0, GALLERY_TARGET - galleryCount);
 
     const startEdit = () => {
@@ -203,7 +208,7 @@ export default function FeatureBottom({ docId, slug }) {
             });
 
             // Append i DB – hooken fanger opp real-time endringen
-            await updateFeatureDoc(id, { images: [...images, ...urls] });
+            await updateFeatureDoc(id, { images: [...imagesSafe, ...urls] });
 
             setSelectedFiles([]);
             setUploadProgress({});
@@ -215,7 +220,10 @@ export default function FeatureBottom({ docId, slug }) {
     };
 
     const isEmpty =
-        !titleTwo && !description && !longDescription && images.length === 0;
+        !titleTwo &&
+        !description &&
+        !longDescription &&
+        imagesSafe.length === 0;
 
     return (
         <Box sx={{ textAlign: "center", mt: 4, position: "relative" }}>
@@ -251,7 +259,7 @@ export default function FeatureBottom({ docId, slug }) {
                 </>
             ) : !edit ? (
                 <>
-                    <Typography variant="h2" sx={{ fontWeight: 700, mb: 1.5 }}>
+                    <Typography variant="h3" sx={{ fontWeight: 600, mb: 1.5 }}>
                         {titleTwo || " "}
                     </Typography>
 
@@ -297,9 +305,9 @@ export default function FeatureBottom({ docId, slug }) {
                         </Typography>
                     )}
 
-                    {/* Galleriet – nå koblet via hooken */}
+                    {/* Galleriet – kun bilder #2–#4 */}
                     <FeatureGalleryView
-                        images={images}
+                        images={galleryImages}
                         loading={imagesLoading}
                         error={imagesError}
                         editable={!!user}
@@ -308,7 +316,7 @@ export default function FeatureBottom({ docId, slug }) {
                                 deleteFromStorage: true,
                             })
                         }
-                        start={0} // vi sender allerede slicet (bilder 1..3)
+                        start={0}
                         limit={null}
                         aspect="1 / 1"
                     />
@@ -343,7 +351,6 @@ export default function FeatureBottom({ docId, slug }) {
                         </Typography>
                     )}
 
-                    {/* Vis ev. samlede feil */}
                     {(error || imagesError) && (
                         <Typography
                             variant="body2"
@@ -405,7 +412,7 @@ export default function FeatureBottom({ docId, slug }) {
                         }
                     >
                         <strong>Målet er 3 galleribilder.</strong> Vi viser
-                        bildene #2–#4 (etter hovedbildet).
+                        bildene #2–#4 (etter hovedbilde).
                         {hasMain
                             ? " Hovedbilde er allerede satt."
                             : " Du trenger også et hovedbilde (første bilde i listen)."}
@@ -420,19 +427,13 @@ export default function FeatureBottom({ docId, slug }) {
                                 }
                                 variant="outlined"
                             />
-                            {Math.max(0, GALLERY_TARGET - galleryCount) > 0 && (
+                            {missing > 0 && (
                                 <Typography
                                     component="span"
                                     variant="body2"
                                     sx={{ ml: 1 }}
                                 >
-                                    Legg til minst{" "}
-                                    <strong>
-                                        {Math.max(
-                                            0,
-                                            GALLERY_TARGET - galleryCount
-                                        )}
-                                    </strong>{" "}
+                                    Legg til minst <strong>{missing}</strong>{" "}
                                     til.
                                 </Typography>
                             )}

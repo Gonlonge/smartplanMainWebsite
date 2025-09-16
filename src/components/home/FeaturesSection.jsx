@@ -29,9 +29,9 @@ const features = [
     },
     {
         icon: <TrendingUpIcon fontSize="large" />,
-        title: "Ressursstyring",
+        title: "Befaring",
         description:
-            "Administrer personale, utstyr og materialer for optimal utnyttelse og reduserte kostnader.",
+            "Bruk appen vår til å gjennomføre vernerunder eller SHA KU-kontroller.",
     },
     {
         icon: <PeopleIcon fontSize="large" />,
@@ -41,9 +41,9 @@ const features = [
     },
     {
         icon: <ScheduleIcon fontSize="large" />,
-        title: "Tidsplanlegging",
+        title: "Fremdriftsplan",
         description:
-            "Hold prosjektet på riktig spor med avanserte tidsplanleggingsverktøy og automatiske påminnelser.",
+            "Få full kontroll på tidslinjen og sikre at prosjektet følger planen.",
     },
     {
         icon: <AnalyticsIcon fontSize="large" />,
