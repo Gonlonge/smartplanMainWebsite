@@ -591,7 +591,7 @@ function HeroSection() {
                         >
                             <Box
                                 component="img"
-                                src="/public/images/groupOfPeopleHavingAMeeting.PNG" // 👈 local image
+                                src="/src/images/groupOfPeopleHavingAMeeting.PNG" // 👈 local image
                                 alt="Construction site planning"
                                 sx={{
                                     position: "absolute",
@@ -615,7 +615,7 @@ function HeroSection() {
                             />
                             <Box
                                 component="img"
-                                src="/public/images/womanCheckingHMS.PNG" // 👈 local image
+                                src="/src/images/womanCheckingHMS.PNG" // 👈 local image
                                 alt="Team working on construction project"
                                 sx={{
                                     position: "absolute",
