@@ -179,6 +179,7 @@
 // // }
 
 // // export default CtaSection;
+
 import {
     Box,
     Container,
@@ -191,6 +192,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
+
+import maleCheckingSmartplan from "../../assets/malecheckingsmartplan.png";
 
 const benefits = [
     "Spar 37% tid på prosjektplanlegging",
@@ -334,8 +337,10 @@ function CtaSection() {
                     >
                         <Box
                             component="img"
-                            src="/src/images/maleCheckingSmartplan.PNG" // 👈 public folder
+                            src={maleCheckingSmartplan}
                             alt="Prosjektmøte"
+                            loading="lazy"
+                            decoding="async"
                             sx={{
                                 display: "block",
                                 width: "100%",
