@@ -733,7 +733,7 @@ function CtaSection() {
                     >
                         <Box
                             component="img"
-                            src="/images/group-of-people-meeting.png" // 👈 from public
+                            src="/images/group-of-people-meeting.png" // <- public
                             alt="Prosjektmøte"
                             sx={{
                                 display: "block",
