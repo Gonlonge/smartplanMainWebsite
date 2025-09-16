@@ -309,7 +309,7 @@ const FeatureMainContent = forwardRef(function FeatureMainContent(
                                     gutterBottom
                                     sx={{ pr: 12 }}
                                 >
-                                    {title || "Uten tittel"}
+                                    {title || ""}
                                 </Typography>
                                 {shortDesc && (
                                     <Typography

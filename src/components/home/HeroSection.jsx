@@ -27,6 +27,7 @@
 //                 alignItems: "center",
 //                 background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
 //                 overflow: "hidden",
+//                 pb: { xs: 6, sm: 10, md: 6 }, // 👈 added bottom padding
 //                 "&::before": {
 //                     content: '""',
 //                     position: "absolute",
@@ -57,10 +58,11 @@
 //                 sx={{
 //                     position: "relative",
 //                     zIndex: 2,
-//                     pt: { xs: 10, sm: 12 }, // Legg til padding på toppen for mobil
+//                     pt: { xs: 10, sm: 12 },
 //                 }}
 //             >
 //                 <Grid container spacing={6} alignItems="center">
+//                     {/* Left content */}
 //                     <Grid
 //                         item
 //                         xs={12}
@@ -119,6 +121,7 @@
 //                             arbeidshverdag med Smartplan.
 //                         </Typography>
 
+//                         {/* Buttons */}
 //                         <Box
 //                             sx={{
 //                                 display: "flex",
@@ -142,14 +145,15 @@
 //                                     fontWeight: 600,
 //                                     borderRadius: "50px",
 //                                     background:
-//                                         "linear-gradient(45deg, #00a0b0 30%, #33b3c1 90%)",
-//                                     boxShadow: "0 8px 20px rgba(0,160,176,0.3)",
+//                                         "linear-gradient(45deg, #9575cd 30%, #7e57c2 90%)",
+//                                     boxShadow:
+//                                         "0 8px 20px rgba(149,117,205,0.3)",
 //                                     "&:hover": {
 //                                         background:
-//                                             "linear-gradient(45deg, #007080 30%, #00a0b0 90%)",
+//                                             "linear-gradient(45deg, #7e57c2 30%, #5e35b1 90%)",
 //                                         transform: "translateY(-2px)",
 //                                         boxShadow:
-//                                             "0 12px 24px rgba(0,160,176,0.4)",
+//                                             "0 12px 24px rgba(149,117,205,0.4)",
 //                                     },
 //                                     transition: "all 0.3s ease",
 //                                 }}
@@ -186,6 +190,7 @@
 //                             </Button>
 //                         </Box>
 
+//                         {/* Stats */}
 //                         <Box
 //                             sx={{
 //                                 mt: 6,
@@ -230,6 +235,7 @@
 //                         </Box>
 //                     </Grid>
 
+//                     {/* Right images */}
 //                     <Grid
 //                         item
 //                         xs={12}
@@ -553,7 +559,6 @@ function HeroSection() {
                             ))}
                         </Box>
                     </Grid>
-
                     {/* Right images */}
                     <Grid
                         item
@@ -586,7 +591,7 @@ function HeroSection() {
                         >
                             <Box
                                 component="img"
-                                src="https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                src="/public/images/groupOfPeopleHavingAMeeting.PNG" // 👈 local image
                                 alt="Construction site planning"
                                 sx={{
                                     position: "absolute",
@@ -610,7 +615,7 @@ function HeroSection() {
                             />
                             <Box
                                 component="img"
-                                src="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                src="/public/images/womanCheckingHMS.PNG" // 👈 local image
                                 alt="Team working on construction project"
                                 sx={{
                                     position: "absolute",

@@ -445,7 +445,7 @@ export default function FeatureHeader({ docId, slug }) {
         }
     };
 
-    const displayTitle = headerTitle || "Uten tittel";
+    const displayTitle = headerTitle || "";
     const displayIntro = headerIntro || "";
 
     return (
