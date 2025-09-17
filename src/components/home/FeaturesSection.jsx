@@ -121,7 +121,7 @@ function FeaturesSection() {
                         tid og reduserer feil.
                     </Typography>
                 </Box>
-
+                <Box></Box>
                 <Grid container spacing={4} ref={ref}>
                     {features.map((feature, index) => (
                         <Grid

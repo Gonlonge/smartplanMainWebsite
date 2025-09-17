@@ -1,4 +1,4 @@
-// import { useState } from "react";
+// import { useState, useEffect } from "react";
 // import { useNavigate, useLocation, Link as RouterLink } from "react-router-dom";
 // import {
 //     AppBar,
@@ -14,20 +14,32 @@
 //     useTheme,
 // } from "@mui/material";
 // import MenuIcon from "@mui/icons-material/Menu";
-
-// const pages = [
-//     { label: "Hjem", path: "/" },
-//     { label: "Priser", path: "/pricing" },
-//     { label: "Kontakt", path: "/contact" },
-//     { label: "Admin", path: "/admin" },
-// ];
+// import { onAuthStateChanged } from "firebase/auth";
+// import { auth } from "../../firebaseConfig"; // adjust path if needed
 
 // function Header({ scrolled }) {
 //     const [anchorElNav, setAnchorElNav] = useState(null);
+//     const [user, setUser] = useState(null);
 //     const theme = useTheme();
 //     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 //     const location = useLocation();
 //     const navigate = useNavigate();
+
+//     // Watch auth state
+//     useEffect(() => {
+//         const unsub = onAuthStateChanged(auth, (u) => {
+//             setUser(u);
+//         });
+//         return () => unsub();
+//     }, []);
+
+//     // Pages for everyone
+//     const pages = [
+//         { label: "Hjem", path: "/" },
+//         { label: "Priser", path: "/pricing" },
+//         { label: "Kontakt", path: "/contact" },
+//         ...(user ? [{ label: "Admin", path: "/admin" }] : []), // only if logged in
+//     ];
 
 //     const isHome = location.pathname === "/";
 //     const textColor = isHome ? "#fff" : "#000";
@@ -285,6 +297,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig"; // adjust path if needed
 
+// Import your logos
+import logoBlack from "../../assets/smartplan-logo-black.svg";
+import logoWhite from "../../assets/smartplan-logo-white.svg";
+
 function Header({ scrolled }) {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [user, setUser] = useState(null);
@@ -350,71 +366,44 @@ function Header({ scrolled }) {
                 <Toolbar disableGutters>
                     {/* Logo for desktop */}
                     <Box
+                        component={RouterLink}
+                        to="/"
                         sx={{
                             display: { xs: "none", md: "flex" },
-                            alignItems: "flex-start",
+                            alignItems: "center",
                             mr: 2,
+                            textDecoration: "none",
                         }}
                     >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component={RouterLink}
-                            to="/"
-                            sx={{
-                                fontSize: "1.5rem",
-                                fontWeight: 500,
-                                letterSpacing: ".2rem",
-                                color: textColor,
-                                textDecoration: "none",
-                            }}
-                        >
-                            Smartplan
-                        </Typography>
                         <Box
+                            component="img"
+                            src={isHome ? logoWhite : logoBlack}
+                            alt="Smartplan logo"
                             sx={{
-                                width: 7,
-                                height: 7,
-                                borderRadius: "50%",
-                                backgroundColor: "#8051C9",
-                                display: "inline-block",
-                                mt: 1.9,
-                                ml: 0.2,
+                                height: 40,
+                                width: "auto",
                             }}
                         />
                     </Box>
 
                     {/* Mobile menu logo */}
                     <Box
+                        component={RouterLink}
+                        to="/"
                         sx={{
                             display: { xs: "flex", md: "none" },
-                            alignItems: "flex-start",
+                            alignItems: "center",
                             mr: 2,
+                            textDecoration: "none",
                         }}
                     >
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            component={RouterLink}
-                            to="/"
-                            sx={{
-                                fontWeight: 700,
-                                letterSpacing: ".1rem",
-                                color: textColor,
-                                textDecoration: "none",
-                            }}
-                        >
-                            Smartplan
-                        </Typography>
                         <Box
+                            component="img"
+                            src={isHome ? logoWhite : logoBlack}
+                            alt="Smartplan logo"
                             sx={{
-                                width: 6,
-                                height: 6,
-                                borderRadius: "50%",
-                                backgroundColor: "#8051C9",
-                                display: "inline-block",
-                                mt: 1.2,
-                                ml: 0.5,
+                                height: 32,
+                                width: "auto",
                             }}
                         />
                     </Box>
